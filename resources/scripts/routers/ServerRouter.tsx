@@ -512,14 +512,15 @@ const ServerRouter = () => {
                             </ul>
                             <div className='shrink-0'>
                                 <div aria-hidden className='mt-8 mb-4 bg-[#ffffff33] min-h-[1px] w-full'></div>
-                                <StatBlock className='p-4 bg-[#ffffff09] border-[1px] border-[#ffffff11] shadow-xs rounded-xl text-center hover:cursor-pointer'>
-                                    Open in Billing
-                                </StatBlock>
+
                                 <StatBlock
                                     title='server'
                                     className='p-4 bg-[#ffffff09] border-[1px] border-[#ffffff11] shadow-xs rounded-xl text-center hover:cursor-default'
                                 >
                                     {serverName}
+                                </StatBlock>
+                                <StatBlock className='p-2 bg-[#ffffff09] border-[1px] border-[#ffffff11] shadow-xs rounded-xl text-center hover:cursor-pointer mb-2'>
+                                    Open in Billing
                                 </StatBlock>
                             </div>
                         </MainSidebar>

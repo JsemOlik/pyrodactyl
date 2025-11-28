@@ -121,7 +121,9 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                     {status === 'offline' ? (
                         <span className={'text-zinc-400'}>Offline</span>
                     ) : (
-                        <Limit limit={textLimits.cpu}>{`${stats.cpu.toFixed(2)}% / ${textLimits.cpu ?? '∞'}`}</Limit>
+                        <Limit
+                            limit={textLimits.cpu}
+                        >{`${stats.cpu.toFixed(2)}% / ${textLimits.cpu ?? 'Unlimited'}`}</Limit>
                     )}
                 </StatBlock>
             </div>
@@ -138,7 +140,7 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                         <span className={'text-zinc-400'}>Offline</span>
                     ) : (
                         <Limit limit={textLimits.memory}>
-                            {`${bytesToString(stats.memory)} / ${textLimits.memory ?? '∞'}`}
+                            {`${bytesToString(stats.memory)} / ${textLimits.memory ?? 'Unlimited'}`}
                         </Limit>
                     )}
                 </StatBlock>
@@ -152,7 +154,9 @@ const ServerDetailsBlock = ({ className }: { className?: string }) => {
                 }}
             >
                 <StatBlock title={'Storage'}>
-                    <Limit limit={textLimits.disk}>{`${bytesToString(stats.disk)} / ${textLimits.disk ?? '∞'}`}</Limit>
+                    <Limit
+                        limit={textLimits.disk}
+                    >{`${bytesToString(stats.disk)} / ${textLimits.disk ?? 'Unlimited'}`}</Limit>
                 </StatBlock>
             </div>
         </div>

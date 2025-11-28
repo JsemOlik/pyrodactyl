@@ -173,10 +173,6 @@ const DashboardRouter = () => {
                             <HugeIconsHome fill='currentColor' />
                             <p>Your Servers</p>
                         </NavLink>
-                        <NavLink to={'/support'} end className='flex flex-row items-center' ref={NavigationSupport}>
-                            <HugeIconsQuestion fill='currentColor' />
-                            <p>Support</p>
-                        </NavLink>
 
                         {/* Optional future items
             <NavLink to={'/account/api'} end className='flex flex-row items-center' ref={NavigationApi}>
@@ -197,6 +193,10 @@ const DashboardRouter = () => {
                             <HugeIconsCashIcon fill='currentColor' />
                             <p>Billing</p>
                         </a>
+                        <NavLink to={'/support'} end className='flex flex-row items-center' ref={NavigationSupport}>
+                            <HugeIconsQuestion fill='currentColor' />
+                            <p>Support</p>
+                        </NavLink>
                         <NavLink to={'/account'} end className='flex flex-row items-center' ref={NavigationSettings}>
                             <HugeIconsDashboardSettings fill='currentColor' />
                             <p>Settings</p>

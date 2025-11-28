@@ -8,6 +8,7 @@ import ContentBox from '@/components/elements/ContentBox';
 import PageContentBlock from '@/components/elements/PageContentBlock';
 
 import Code from '../elements/Code';
+import ConfigurePrivacyForm from './forms/ConfigurePrivacyForm';
 
 const AccountOverviewContainer = () => {
     const { state } = useLocation();
@@ -60,7 +61,7 @@ const AccountOverviewContainer = () => {
                                 <ConfigureTwoFactorForm />
                             </ContentBox>
                             <ContentBox title={'Privacy Toggle'}>
-                                <ConfigureTwoFactorForm />
+                                <ConfigurePrivacyForm />
                             </ContentBox>
                         </div>
                     </div>

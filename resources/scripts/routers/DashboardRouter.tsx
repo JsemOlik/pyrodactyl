@@ -19,13 +19,12 @@ import { DashboardMobileMenu } from '@/components/elements/MobileFullScreenMenu'
 import MobileTopBar from '@/components/elements/MobileTopBar';
 import Logo from '@/components/elements/PyroLogo';
 import { NotFound } from '@/components/elements/ScreenBlock';
-// import HugeIconsApi from '@/components/elements/hugeicons/Api';
+import HugeIconsApi from '@/components/elements/hugeicons/Api';
 import HugeIconsCashIcon from '@/components/elements/hugeicons/CashIcon';
 import HugeIconsDashboardSettings from '@/components/elements/hugeicons/DashboardSettings';
 import HugeIconsHome from '@/components/elements/hugeicons/Home';
 import HugeIconsQuestion from '@/components/elements/hugeicons/Question';
-
-// import HugeIconsSsh from '@/components/elements/hugeicons/Ssh';
+import HugeIconsSsh from '@/components/elements/hugeicons/Ssh';
 
 import http from '@/api/http';
 
@@ -173,21 +172,17 @@ const DashboardRouter = () => {
                             <HugeIconsHome fill='currentColor' />
                             <p>Your Servers</p>
                         </NavLink>
-
-                        {/* Optional future items
-            <NavLink to={'/account/api'} end className='flex flex-row items-center' ref={NavigationApi}>
-              <HugeIconsApi fill='currentColor' />
-              <p>API Keys</p>
-            </NavLink>
-            <NavLink to={'/account/ssh'} end className='flex flex-row items-center' ref={NavigationSSH}>
-              <HugeIconsSsh fill='currentColor' />
-              <p>SSH Keys</p>
-            </NavLink>
-            */}
-
+                        Optional future items
+                        <NavLink to={'/account/api'} end className='flex flex-row items-center' ref={NavigationApi}>
+                            <HugeIconsApi fill='currentColor' />
+                            <p>API Keys</p>
+                        </NavLink>
+                        <NavLink to={'/account/ssh'} end className='flex flex-row items-center' ref={NavigationSSH}>
+                            <HugeIconsSsh fill='currentColor' />
+                            <p>SSH Keys</p>
+                        </NavLink>
                         {/* Spacer pushes the following links to the bottom */}
                         <div className='pyro-subnav-spacer' />
-
                         {/* Bottom links */}
                         <a href={'/billing'} className='flex flex-row items-center' ref={NavigationSettingsBilling}>
                             <HugeIconsCashIcon fill='currentColor' />

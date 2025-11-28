@@ -1,19 +1,5 @@
 'use client';
 
-import {
-    Box,
-    BranchesDown,
-    ClockArrowRotateLeft,
-    CloudArrowUpIn,
-    Database,
-    Ellipsis,
-    FolderOpen,
-    Gear,
-    House,
-    PencilToLine,
-    Persons,
-    Terminal,
-} from '@gravity-ui/icons';
 import { useStoreState } from 'easy-peasy';
 import React, { Fragment, Suspense, useEffect, useRef, useState } from 'react';
 import { NavLink, Route, Routes, useLocation, useParams } from 'react-router-dom';
@@ -33,11 +19,23 @@ import MainSidebar from '@/components/elements/MainSidebar';
 import MainWrapper from '@/components/elements/MainWrapper';
 import { ServerMobileMenu } from '@/components/elements/MobileFullScreenMenu';
 import MobileTopBar from '@/components/elements/MobileTopBar';
-import ModrinthLogo from '@/components/elements/ModrinthLogo';
+// import ModrinthLogo from '@/components/elements/ModrinthLogo';
 import PermissionRoute from '@/components/elements/PermissionRoute';
 import Logo from '@/components/elements/PyroLogo';
 import { NotFound, ServerError } from '@/components/elements/ScreenBlock';
 import CommandMenu from '@/components/elements/commandk/CmdK';
+import HugeIconsClock from '@/components/elements/hugeicons/Clock';
+import HugeIconsCloudUp from '@/components/elements/hugeicons/CloudUp';
+import HugeIconsConnections from '@/components/elements/hugeicons/Connections';
+import HugeIconsConsole from '@/components/elements/hugeicons/Console';
+import HugeIconsController from '@/components/elements/hugeicons/Controller';
+import HugeIconsDashboardSettings from '@/components/elements/hugeicons/DashboardSettings';
+import HugeIconsDatabase from '@/components/elements/hugeicons/Database';
+import HugeIconsFolder from '@/components/elements/hugeicons/Folder';
+import HugeIconsHome from '@/components/elements/hugeicons/Home';
+import HugeIconsPencil from '@/components/elements/hugeicons/Pencil';
+import HugeIconsPeople from '@/components/elements/hugeicons/People';
+import HugeIconsZap from '@/components/elements/hugeicons/Zap';
 import ConflictStateRenderer from '@/components/server/ConflictStateRenderer';
 import InstallListener from '@/components/server/InstallListener';
 import TransferListener from '@/components/server/TransferListener';
@@ -67,7 +65,7 @@ const DatabasesSidebarItem = React.forwardRef<HTMLAnchorElement, { id: string; o
                     onClick={onClick}
                     end
                 >
-                    <Database width={22} height={22} fill='currentColor' />
+                    <HugeIconsDatabase fill='currentColor' />
                     <p>Databases</p>
                 </NavLink>
             </Can>
@@ -92,7 +90,7 @@ const BackupsSidebarItem = React.forwardRef<HTMLAnchorElement, { id: string; onC
                     onClick={onClick}
                     end
                 >
-                    <CloudArrowUpIn width={22} height={22} fill='currentColor' />
+                    <HugeIconsCloudUp fill='currentColor' />
                     <p>Backups</p>
                 </NavLink>
             </Can>
@@ -136,7 +134,7 @@ const NetworkingSidebarItem = React.forwardRef<HTMLAnchorElement, { id: string; 
                     onClick={onClick}
                     end
                 >
-                    <BranchesDown width={22} height={22} fill='currentColor' />
+                    <HugeIconsConnections fill='currentColor' />
                     <p>Networking</p>
                 </NavLink>
             </Can>
@@ -367,7 +365,16 @@ const ServerRouter = () => {
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                         <button className='w-10 h-10 flex items-center justify-center rounded-md text-white hover:bg-[#ffffff11] p-2 select-none cursor-pointer'>
-                                            <Ellipsis fill='currentColor' width={26} height={22} />
+                                            <svg
+                                                xmlns='http://www.w3.org/2000/svg'
+                                                width='16'
+                                                height='15'
+                                                fill='currentColor'
+                                                viewBox='0 0 16 15'
+                                                className='flex shrink-0 h-full w-full'
+                                            >
+                                                <path d='M8.9375 7.3775C8.9375 7.56341 8.88252 7.74515 8.7795 7.89974C8.67649 8.05432 8.53007 8.1748 8.35877 8.24595C8.18746 8.31709 7.99896 8.33571 7.8171 8.29944C7.63525 8.26317 7.4682 8.17364 7.33709 8.04218C7.20598 7.91072 7.11669 7.74323 7.08051 7.56088C7.04434 7.37854 7.06291 7.18954 7.13386 7.01778C7.20482 6.84601 7.32498 6.69921 7.47915 6.59592C7.63332 6.49263 7.81458 6.4375 8 6.4375C8.24864 6.4375 8.4871 6.53654 8.66291 6.71282C8.83873 6.8891 8.9375 7.1282 8.9375 7.3775ZM1.625 6.4375C1.43958 6.4375 1.25832 6.49263 1.10415 6.59592C0.949982 6.69921 0.829821 6.84601 0.758863 7.01778C0.687906 7.18954 0.669341 7.37854 0.705514 7.56088C0.741688 7.74323 0.830976 7.91072 0.962088 8.04218C1.0932 8.17364 1.26025 8.26317 1.4421 8.29944C1.62396 8.33571 1.81246 8.31709 1.98377 8.24595C2.15507 8.1748 2.30149 8.05432 2.4045 7.89974C2.50752 7.74515 2.5625 7.56341 2.5625 7.3775C2.5625 7.1282 2.46373 6.8891 2.28791 6.71282C2.1121 6.53654 1.87364 6.4375 1.625 6.4375ZM14.375 6.4375C14.1896 6.4375 14.0083 6.49263 13.8542 6.59592C13.7 6.69921 13.5798 6.84601 13.5089 7.01778C13.4379 7.18954 13.4193 7.37854 13.4555 7.56088C13.4917 7.74323 13.581 7.91072 13.7121 8.04218C13.8432 8.17364 14.0102 8.26317 14.1921 8.29944C14.374 8.33571 14.5625 8.31709 14.7338 8.24595C14.9051 8.1748 15.0515 8.05432 15.1545 7.89974C15.2575 7.74515 15.3125 7.56341 15.3125 7.3775C15.3125 7.1282 15.2137 6.8891 15.0379 6.71282C14.8621 6.53654 14.6236 6.4375 14.375 6.4375Z' />
+                                            </svg>
                                         </button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent className='z-99999 select-none relative' sideOffset={8}>
@@ -396,7 +403,7 @@ const ServerRouter = () => {
                                     to={`/server/${id}`}
                                     end
                                 >
-                                    <House width={22} height={22} fill='currentColor' />
+                                    <HugeIconsHome fill='currentColor' />
                                     <p>Home</p>
                                 </NavLink>
                                 <>
@@ -406,13 +413,13 @@ const ServerRouter = () => {
                                             ref={NavigationFiles}
                                             to={`/server/${id}/files`}
                                         >
-                                            <FolderOpen width={22} height={22} fill='currentColor' />
+                                            <HugeIconsFolder fill='currentColor' />
                                             <p>Files</p>
                                         </NavLink>
                                     </Can>
-                                    <DatabasesSidebarItem id={id} ref={NavigationDatabases} onClick={() => {}} />
-                                    <BackupsSidebarItem id={id} ref={NavigationBackups} onClick={() => {}} />
-                                    <NetworkingSidebarItem id={id} ref={NavigationNetworking} onClick={() => {}} />
+                                    <DatabasesSidebarItem id={id} ref={NavigationDatabases} onClick={() => { }} />
+                                    <BackupsSidebarItem id={id} ref={NavigationBackups} onClick={() => { }} />
+                                    <NetworkingSidebarItem id={id} ref={NavigationNetworking} onClick={() => { }} />
                                     <Can action={'user.*'} matchAny>
                                         <NavLink
                                             className='flex flex-row items-center transition-colors duration-200 hover:bg-[#ffffff11] rounded-md'
@@ -420,7 +427,7 @@ const ServerRouter = () => {
                                             to={`/server/${id}/users`}
                                             end
                                         >
-                                            <Persons width={22} height={22} fill='currentColor' />
+                                            <HugeIconsPeople fill='currentColor' />
                                             <p>Users</p>
                                         </NavLink>
                                     </Can>
@@ -439,7 +446,7 @@ const ServerRouter = () => {
                                             to={`/server/${id}/startup`}
                                             end
                                         >
-                                            <Terminal width={22} height={22} fill='currentColor' />
+                                            <HugeIconsConsole fill='currentColor' />
                                             <p>Startup</p>
                                         </NavLink>
                                     </Can>
@@ -449,7 +456,7 @@ const ServerRouter = () => {
                                             ref={NavigationSchedules}
                                             to={`/server/${id}/schedules`}
                                         >
-                                            <ClockArrowRotateLeft width={22} height={22} fill='currentColor' />
+                                            <HugeIconsClock fill='currentColor' />
                                             <p>Schedules</p>
                                         </NavLink>
                                     </Can>
@@ -460,7 +467,7 @@ const ServerRouter = () => {
                                             to={`/server/${id}/settings`}
                                             end
                                         >
-                                            <Gear width={22} height={22} fill='currentColor' />
+                                            <HugeIconsDashboardSettings fill='currentColor' />
                                             <p>Settings</p>
                                         </NavLink>
                                     </Can>
@@ -471,7 +478,7 @@ const ServerRouter = () => {
                                             to={`/server/${id}/activity`}
                                             end
                                         >
-                                            <PencilToLine width={22} height={22} fill='currentColor' />
+                                            <HugeIconsPencil fill='currentColor' />
                                             <p>Activity</p>
                                         </NavLink>
                                     </Can>
@@ -495,8 +502,8 @@ const ServerRouter = () => {
                                         to={`/server/${id}/shell`}
                                         end
                                     >
-                                        <Box width={22} height={22} fill='currentColor' />
-                                        <p>Games</p>
+                                        <HugeIconsController fill='currentColor' />
+                                        <p>Software</p>
                                     </NavLink>
                                 </Can>
                             </ul>
@@ -522,7 +529,7 @@ const ServerRouter = () => {
                                 className='relative inset-[1px] w-full h-full overflow-y-auto overflow-x-hidden rounded-md bg-[#08080875]'
                             >
                                 {inConflictState &&
-                                (!rootAdmin || (rootAdmin && !location.pathname.endsWith(`/server/${id}`))) ? (
+                                    (!rootAdmin || (rootAdmin && !location.pathname.endsWith(`/server/${id}`))) ? (
                                     <ConflictStateRenderer />
                                 ) : (
                                     <ErrorBoundary>

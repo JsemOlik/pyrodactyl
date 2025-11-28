@@ -7,6 +7,7 @@ use Pterodactyl\Http\Middleware\Activity\AccountSubject;
 use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
 use Pterodactyl\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
 use Pterodactyl\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
+use Pterodactyl\Http\Controllers\Api\Client\ServersOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ Route::get('/', [Client\ClientController::class, 'index'])->name('api:client.ind
 Route::get('/permissions', [Client\ClientController::class, 'permissions']);
 Route::get('/version', function () {
     return response()->json(['version' => config('app.version')]);
+});
+
+Route::prefix('/servers')->group(function () {
+    Route::get('/order', [Client\ServersOrderController::class, 'show']);
+    Route::put('/order', [Client\ServersOrderController::class, 'update']);
 });
 
 Route::prefix('/nests')->group(function () {
@@ -50,6 +56,7 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
         Route::post('/remove', [Client\SSHKeyController::class, 'delete']);
     });
 });
+
 
 /*
 |--------------------------------------------------------------------------

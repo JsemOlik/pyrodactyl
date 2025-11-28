@@ -496,7 +496,7 @@ const ServerRouter = () => {
                                         end
                                     >
                                         <Box width={22} height={22} fill='currentColor' />
-                                        <p>Software</p>
+                                        <p>Games</p>
                                     </NavLink>
                                 </Can>
                             </ul>

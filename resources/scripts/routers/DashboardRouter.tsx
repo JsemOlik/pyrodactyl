@@ -14,6 +14,7 @@ import {
 } from '@/components/elements/DropdownMenu';
 import MainSidebar from '@/components/elements/MainSidebar';
 import MainWrapper from '@/components/elements/MainWrapper';
+import FAQContainer from '@/components/dashboard/FaqContainer';
 import { DashboardMobileMenu } from '@/components/elements/MobileFullScreenMenu';
 import MobileTopBar from '@/components/elements/MobileTopBar';
 import Logo from '@/components/elements/PyroLogo';
@@ -250,6 +251,8 @@ const DashboardRouter = () => {
                     element={<Component />}
                   />
                 ))}
+
+                <Route path="faq" element={<FAQContainer />} />
 
                 <Route path="*" element={<NotFound />} />
               </Routes>

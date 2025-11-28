@@ -9,8 +9,8 @@ const HugeIconsCashIcon = (props: HugeIconProps) => {
             width='24'
             height='24'
             color='currentColor'
-            fill={props.fill}
-            stroke='currentColor'
+            fill='currentColor'
+            stroke={props.fill}
             strokeWidth='1.5'
             strokeLinecap='round'
             strokeLinejoin='round'

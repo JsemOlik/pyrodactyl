@@ -5,6 +5,7 @@ namespace Pterodactyl\Http\Controllers\Api\Client;
 use Illuminate\Http\Request;
 use Pterodactyl\Models\UserServerOrder;
 use Pterodactyl\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class ServersOrderController extends Controller
 {
@@ -27,26 +28,50 @@ class ServersOrderController extends Controller
      */
     public function update(Request $request)
     {
-        $user = $request->user();
+        try {
+            $user = $request->user();
 
-        $data = $request->validate([
-            'order' => ['sometimes', 'array'],
-            'order.*' => ['string'], // server UUIDs
-            'sort_option' => ['sometimes', 'string', 'in:default,name_asc,custom'],
-        ]);
+            $data = $request->validate([
+                'order' => ['sometimes', 'array'],
+                'order.*' => ['string'], // server UUIDs
+                'sort_option' => ['sometimes', 'string', 'in:default,name_asc,custom'],
+            ]);
 
-        // Upsert for this user
-        $record = UserServerOrder::updateOrCreate(
-            ['user_id' => $user->id],
-            array_filter([
-                'order' => $data['order'] ?? null,
-                'sort_option' => $data['sort_option'] ?? null,
-            ])
-        );
+            // Prepare data for upsert, filtering out null values
+            $updateData = [];
+            if (isset($data['order'])) {
+                $updateData['order'] = $data['order'];
+            }
+            if (isset($data['sort_option'])) {
+                $updateData['sort_option'] = $data['sort_option'];
+            }
 
-        return response()->json([
-            'order' => $record->order,
-            'sort_option' => $record->sort_option,
-        ]);
+            // Upsert for this user
+            $record = UserServerOrder::updateOrCreate(
+                ['user_id' => $user->id],
+                $updateData
+            );
+
+            return response()->json([
+                'order' => $record->order ?? [],
+                'sort_option' => $record->sort_option ?? 'default',
+            ]);
+        } catch (\Exception $e) {
+            Log::error('Error updating server order preferences', [
+                'user_id' => $request->user()->id,
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+
+            return response()->json([
+                'errors' => [
+                    [
+                        'code' => 'ServerOrderUpdateError',
+                        'status' => '500',
+                        'detail' => $e->getMessage()
+                    ]
+                ]
+            ], 500);
+        }
     }
 }

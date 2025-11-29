@@ -655,7 +655,7 @@ const SoftwareContainer = () => {
                         disabled={isLoading}
                     >
                         {isLoading && <Spinner size='small' />}
-                        Change Software
+                        Change Game
                     </ActionButton>
                 </div>
             </div>
@@ -928,18 +928,22 @@ const SoftwareContainer = () => {
                                             Create Backup
                                         </label>
                                         <p className='text-xs text-neutral-400 leading-relaxed'>
-                                            {backupLimit !== 0 && (backupLimit === null || (backups?.backupCount || 0) < backupLimit)
+                                            {backupLimit !== 0 &&
+                                            (backupLimit === null || (backups?.backupCount || 0) < backupLimit)
                                                 ? 'Automatically create a backup before applying changes'
                                                 : backupLimit === 0
-                                                    ? 'Backups are disabled for this server'
-                                                    : 'Backup limit reached'}
+                                                  ? 'Backups are disabled for this server'
+                                                  : 'Backup limit reached'}
                                         </p>
                                     </div>
                                     <div className='flex-shrink-0'>
                                         <Switch
                                             checked={shouldBackup}
                                             onCheckedChange={setShouldBackup}
-                                            disabled={backupLimit === 0 || (backupLimit !== null && (backups?.backupCount || 0) >= backupLimit)}
+                                            disabled={
+                                                backupLimit === 0 ||
+                                                (backupLimit !== null && (backups?.backupCount || 0) >= backupLimit)
+                                            }
                                         />
                                     </div>
                                 </div>
@@ -1166,7 +1170,7 @@ const SoftwareContainer = () => {
     // Show loading state if server data is not available
     if (!serverData) {
         return (
-            <ServerContentBlock title='Software Management'>
+            <ServerContentBlock title='Game/Software Management'>
                 <div className='flex items-center justify-center h-64'>
                     <div className='flex flex-col items-center text-center'>
                         <Spinner size='large' />

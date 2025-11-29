@@ -172,7 +172,6 @@ const DashboardRouter = () => {
                             <HugeIconsHome fill='currentColor' />
                             <p>Your Servers</p>
                         </NavLink>
-                        Optional future items
                         <NavLink to={'/account/api'} end className='flex flex-row items-center' ref={NavigationApi}>
                             <HugeIconsApi fill='currentColor' />
                             <p>API Keys</p>

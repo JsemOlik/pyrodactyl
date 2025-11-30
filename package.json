@@ -43,7 +43,6 @@
         "axios": "^1.11.0",
         "browserslist": "^4.25.1",
         "chart.js": "^4.5.0",
-        "claude": "^0.1.2",
         "clsx": "^2.1.1",
         "cmdk": "^1.1.1",
         "copy-to-clipboard": "^3.3.3",

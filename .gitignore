@@ -9,6 +9,7 @@ elytra
 !elytra/
 
 BILLING-PLAN.md
+/quark-portal
 
 *.DS_Store*
 !.env.ci

@@ -8,6 +8,8 @@
 elytra
 !elytra/
 
+BILLING-PLAN.md
+
 *.DS_Store*
 !.env.ci
 !.env.example

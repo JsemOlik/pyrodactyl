@@ -24,6 +24,7 @@ const DashboardRouter = lazy(() => import('@/routers/DashboardRouter'));
 const ServerRouter = lazy(() => import('@/routers/ServerRouter'));
 const AuthenticationRouter = lazy(() => import('@/routers/AuthenticationRouter'));
 const HostingContainer = lazy(() => import('@/components/hosting/HostingContainer'));
+const HostingConfigureContainer = lazy(() => import('@/components/hosting/HostingConfigureContainer'));
 
 interface ExtendedWindow extends Window {
     SiteConfiguration?: SiteSettings;
@@ -107,6 +108,17 @@ const App = () => {
                                         <Spinner.Suspense>
                                             <HostingContainer />
                                         </Spinner.Suspense>
+                                    }
+                                />
+
+                                <Route
+                                    path='/hosting/configure'
+                                    element={
+                                        <AuthenticatedRoute>
+                                            <Spinner.Suspense>
+                                                <HostingConfigureContainer />
+                                            </Spinner.Suspense>
+                                        </AuthenticatedRoute>
                                     }
                                 />
 

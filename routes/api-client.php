@@ -34,6 +34,7 @@ Route::prefix('/nests')->group(function () {
     Route::get('/{nest}', [Client\Nests\NestController::class, 'view'])->name('api:client.nests.view');
 });
 
+
 Route::prefix('/account')->middleware(AccountSubject::class)->group(function () {
     Route::prefix('/')->withoutMiddleware(RequireTwoFactorAuthentication::class)->group(function () {
         Route::get('/', [Client\AccountController::class, 'index'])->name('api:client.account');

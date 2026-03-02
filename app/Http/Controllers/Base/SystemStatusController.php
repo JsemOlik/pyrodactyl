@@ -26,10 +26,7 @@ class SystemStatusController extends Controller
           ],
           'system' => [
             'php_version' => PHP_VERSION,
-            'os' => php_uname(),
-            'hostname' => gethostname(),
-            'load_average' => sys_getloadavg(),
-          ]
+          ],
         ];
       });
 

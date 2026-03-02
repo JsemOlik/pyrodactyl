@@ -6,6 +6,8 @@ use Illuminate\Http\Response;
 use Pterodactyl\Models\Server;
 use Pterodactyl\Models\Database;
 use Pterodactyl\Facades\Activity;
+use Pterodactyl\Models\Permission;
+use Pterodactyl\Exceptions\Http\HttpForbiddenException;
 use Pterodactyl\Services\Databases\DatabasePasswordService;
 use Pterodactyl\Transformers\Api\Client\DatabaseTransformer;
 use Pterodactyl\Services\Databases\DatabaseManagementService;
@@ -111,6 +113,10 @@ class DatabaseController extends ClientApiController
     {
         $info = $this->dashboardService->getConnectionInfo($server);
 
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_VIEW_PASSWORD, $server)) {
+            unset($info['password']);
+        }
+
         return $this->fractal->item($info)
             ->transformWith(function ($item) {
                 return ['attributes' => $item];
@@ -173,6 +179,10 @@ class DatabaseController extends ClientApiController
      */
     public function createDatabase(GetDatabasesRequest $request, Server $server): array
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_CREATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to create databases for this server.');
+        }
+
         $request->validate([
             'name' => 'required|string|min:1|max:64|regex:/^[a-zA-Z0-9_]+$/',
             'username' => 'nullable|string|min:1|max:32|regex:/^[a-zA-Z0-9_]+$/',
@@ -202,6 +212,10 @@ class DatabaseController extends ClientApiController
      */
     public function deleteDatabase(GetDatabasesRequest $request, Server $server): Response
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_DELETE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to delete databases for this server.');
+        }
+
         $request->validate([
             'name' => 'required|string',
         ]);
@@ -260,6 +274,10 @@ class DatabaseController extends ClientApiController
      */
     public function createTable(GetDatabasesRequest $request, Server $server): array
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_UPDATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to modify database tables for this server.');
+        }
+
         $request->validate([
             'name' => 'required|string|min:1|max:64|regex:/^[a-zA-Z0-9_]+$/',
             'columns' => 'required|array|min:1',
@@ -293,6 +311,10 @@ class DatabaseController extends ClientApiController
      */
     public function deleteTable(GetDatabasesRequest $request, Server $server): Response
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_UPDATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to modify database tables for this server.');
+        }
+
         $request->validate([
             'table' => 'required|string',
             'database' => 'nullable|string',
@@ -343,6 +365,10 @@ class DatabaseController extends ClientApiController
      */
     public function insertRow(GetDatabasesRequest $request, Server $server): array
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_UPDATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to modify database rows for this server.');
+        }
+
         $request->validate([
             'table' => 'required|string',
             'data' => 'required|array',
@@ -370,6 +396,10 @@ class DatabaseController extends ClientApiController
      */
     public function updateRow(GetDatabasesRequest $request, Server $server): array
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_UPDATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to modify database rows for this server.');
+        }
+
         $request->validate([
             'table' => 'required|string',
             'data' => 'required|array',
@@ -399,6 +429,10 @@ class DatabaseController extends ClientApiController
      */
     public function deleteRow(GetDatabasesRequest $request, Server $server): Response
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_UPDATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to modify database rows for this server.');
+        }
+
         $request->validate([
             'table' => 'required|string',
             'where' => 'required|array',
@@ -497,6 +531,10 @@ class DatabaseController extends ClientApiController
      */
     public function updateSettings(GetDatabasesRequest $request, Server $server): array
     {
+        if ($request->user()->cannot(Permission::ACTION_DATABASE_UPDATE, $server)) {
+            throw new HttpForbiddenException('You do not have permission to update database settings for this server.');
+        }
+
         $request->validate([
             'charset' => 'nullable|string|max:50',
             'collation' => 'nullable|string|max:50',

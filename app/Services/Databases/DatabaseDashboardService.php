@@ -35,13 +35,12 @@ class DatabaseDashboardService
         $host = $database->host;
         $password = $this->encrypter->decrypt($database->password);
 
-        // Build connection strings
+        // Build connection strings without inlining the password in the CLI example
         $mysqlString = sprintf(
-            'mysql -h %s -P %d -u %s -p%s %s',
+            'mysql -h %s -P %d -u %s -p %s',
             $host->host,
             $host->port,
             $database->username,
-            $password,
             $database->database,
         );
 
@@ -836,7 +835,7 @@ class DatabaseDashboardService
             if (!empty($results)) {
                 $firstRow = (array) $results[0];
                 $columns = array_keys($firstRow);
-                
+
                 $data = array_map(function ($row) use ($columns) {
                     $result = [];
                     foreach ($columns as $col) {
@@ -848,12 +847,20 @@ class DatabaseDashboardService
                 $columns = [];
             }
 
+            $totalRowCount = count($data);
+            $maxRows = 1000;
+            if ($totalRowCount > $maxRows) {
+                $data = array_slice($data, 0, $maxRows);
+            }
+
             return [
                 'success' => true,
                 'data' => $data,
                 'columns' => $columns,
                 'rowCount' => count($data),
                 'executionTime' => round($executionTime, 2),
+                'totalRowCount' => $totalRowCount,
+                'truncated' => $totalRowCount > $maxRows,
             ];
         } finally {
             $this->databaseManager->purge('dashboard_query');

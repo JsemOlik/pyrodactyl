@@ -35,9 +35,10 @@ class DatabaseDashboardService
         $host = $database->host;
         $password = $this->encrypter->decrypt($database->password);
 
-        // Build connection strings without inlining the password in the CLI example
+        // Build connection strings without inlining the password in the CLI example.
+        // The "-p" flag will prompt for the password interactively; the final argument is the database name.
         $mysqlString = sprintf(
-            'mysql -h %s -P %d -u %s -p %s',
+            'mysql -h %s -P %d -u %s -p -- %s',
             $host->host,
             $host->port,
             $database->username,

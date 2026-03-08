@@ -31,7 +31,7 @@ class HostingPlanController extends Controller
     public function index(Request $request): array
     {
         $type = $request->query('type', 'game-server'); // Default to game-server for backward compatibility
-        
+
         $plans = Plan::query()
             ->active()
             ->predefined()
@@ -156,17 +156,15 @@ class HostingPlanController extends Controller
     {
         $categories = $this->settings->get('settings::billing:plan_categories', json_encode([
             ['name' => 'Game', 'slug' => 'game-server'],
-            ,
         ]));
-        
+
         $decoded = json_decode($categories, true);
         if (!is_array($decoded)) {
             $decoded = [
                 ['name' => 'Game', 'slug' => 'game-server'],
-                ,
             ];
         }
-        
+
         return [
             'object' => 'list',
             'data' => $decoded,
@@ -179,12 +177,12 @@ class HostingPlanController extends Controller
     public function getBillingDiscounts(): array
     {
         $discounts = $this->settings->get('settings::billing:period_discounts', json_encode([]));
-        
+
         $decoded = json_decode($discounts, true);
         if (!is_array($decoded)) {
             $decoded = [];
         }
-        
+
         return [
             'object' => 'discounts',
             'data' => $decoded,

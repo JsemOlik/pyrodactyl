@@ -46,9 +46,14 @@ class EggSeeder extends Seeder
     {
         foreach (static::$import as $nest) {
             /* @noinspection PhpParamsInspection */
-            $this->parseEggFiles(
-                Nest::query()->where('author', 'support@pterodactyl.io')->where('name', $nest)->firstOrFail()
-            );
+            $nestModel = Nest::query()->where('author', 'support@pterodactyl.io')->where('name', $nest)->first();
+
+            if (!$nestModel) {
+                $this->command->warn("Nest '{$nest}' with author 'support@pterodactyl.io' not found, skipping...");
+                continue;
+            }
+
+            $this->parseEggFiles($nestModel);
         }
     }
 

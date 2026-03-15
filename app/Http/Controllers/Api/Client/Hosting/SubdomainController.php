@@ -21,7 +21,7 @@ class SubdomainController extends Controller
     {
         try {
             $domains = $this->subdomainService->getAvailableDomains();
-            
+
             return response()->json([
                 'object' => 'list',
                 'data' => $domains,

@@ -88,7 +88,9 @@ const HostingContainer = () => {
         data: plans,
         error,
         isLoading,
-    } = useSWR<HostingPlan[]>(['/api/client/hosting/plans', hostingType], () => getHostingPlans(hostingType));
+    } = useSWR<HostingPlan[]>(hostingType ? `/api/client/hosting/plans?type=${hostingType}` : null, () =>
+        getHostingPlans(hostingType),
+    );
     const isAuthenticated = useStoreState((state) => !!state.user.data?.uuid);
 
     const [customMemory, setCustomMemory] = useState<number>(16384); // 16GB in MB

@@ -40,12 +40,28 @@ class NestSeeder extends Seeder
             'author' => 'support@pterodactyl.io',
         ])->keyBy('name')->toArray();
 
-        $this->createMinecraftNest(array_get($items, 'Minecraft'));
-        $this->createSourceEngineNest(array_get($items, 'Source Engine'));
-        $this->createVoiceServersNest(array_get($items, 'Voice Servers'));
-        $this->createRustNest(array_get($items, 'Rust'));
-        $this->createVintageStoryNest(array_get($items, 'Vintage Story'));
-        $this->createDatabasesNest(array_get($items, 'Databases'));
+        $this->createMinecraftNest($items['Minecraft'] ?? null);
+        $this->createHytaleNest($items['Hytale'] ?? null);
+        $this->createSourceEngineNest($items['Source Engine'] ?? null);
+        $this->createVoiceServersNest($items['Voice Servers'] ?? null);
+        $this->createRustNest($items['Rust'] ?? null);
+        $this->createVintageStoryNest($items['Vintage Story'] ?? null);
+        $this->createDatabasesNest($items['Databases'] ?? null);
+    }
+
+    /**
+     * Create the Hytale nest to be used later on.
+     *
+     * @throws \Pterodactyl\Exceptions\Model\DataValidationException
+     */
+    private function createHytaleNest(?array $nest = null)
+    {
+        if (is_null($nest)) {
+            $this->creationService->handle([
+                'name' => 'Hytale',
+                'description' => 'Hytale - a game of adventure and creativity.',
+            ], 'support@pterodactyl.io');
+        }
     }
 
     /**

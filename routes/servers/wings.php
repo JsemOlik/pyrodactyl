@@ -4,6 +4,7 @@
 use Illuminate\Support\Facades\Route;
 use Pterodactyl\Http\Controllers\Api\Client;
 use Pterodactyl\Http\Controllers\Api\Client\Servers;
+use Pterodactyl\Http\Controllers\Api\Client\Servers\Elytra;
 use Pterodactyl\Http\Controllers\Api\Client\Servers\Wings;
 use Pterodactyl\Http\Middleware\Activity\ServerSubject;
 use Pterodactyl\Http\Middleware\Activity\AccountSubject;
@@ -107,6 +108,16 @@ Route::group([
         Route::put('/command', [Wings\StartupController::class, 'updateCommand']);
         Route::get('/command/default', [Wings\StartupController::class, 'getDefaultCommand']);
         Route::post('/command/process', [Wings\StartupController::class, 'processCommand']);
+    });
+
+    Route::group(['prefix' => '/subdomain'], function () {
+        Route::get('/', [Elytra\SubdomainController::class, 'index']);
+        Route::post('/', [Elytra\SubdomainController::class, 'store'])
+            ->middleware('throttle:10,1');
+        Route::delete('/', [Elytra\SubdomainController::class, 'destroy'])
+            ->middleware('throttle:10,1');
+        Route::post('/check-availability', [Elytra\SubdomainController::class, 'checkAvailability'])
+            ->middleware('throttle:25,1');
     });
 
     Route::group(['prefix' => '/settings'], function () {

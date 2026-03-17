@@ -19,7 +19,7 @@ RUN if [ "$DEV" = "false" ]; then \
 COPY . .
 RUN if [ "$DEV" = "false" ]; then \
     pnpm install --frozen-lockfile \
-    && pnpm run ship; \
+    && pnpm run build:turbo; \
     fi
 
 # Stage 1:
